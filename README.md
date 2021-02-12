@@ -1,2 +1,5 @@
-##Initial
-```  go test  ```
+#Initial
+``` go test  ```
+<hr>
+#run
+``` gomon . ```
