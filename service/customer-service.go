@@ -4,7 +4,6 @@ import (
 	"init/entity"
 )
 
-
 type CustomerService interface {
 	FindAll() []entity.Customer
 }
@@ -20,7 +19,17 @@ func New() CustomerService {
 }
 
 func (service *customerService) FindAll() []entity.Customer {
-	return service.customers
+	var result = []entity.Customer{
+		{
+			Name: "Alice",
+			Age:  12,
+		},
+		{
+			Name: "Bob",
+			Age:  15,
+		},
+	}
+	return result
 }
 
 // func (service *videoService) Save(video entity.Video) entity.Video {
