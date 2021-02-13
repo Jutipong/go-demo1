@@ -4,30 +4,16 @@ import (
 	"init/entity"
 )
 
-type CustomerService interface {
-	FindAll() []entity.Customer
-}
-
-type customerService struct {
-	customers []entity.Customer
-}
-
-func New() CustomerService {
-	return &customerService{
-		customers: []entity.Customer{},
+func FindALL() []entity.Customer {
+	if err := Config.DB.Where("id = ?", id).First(b).Error; err != nil {
+		return err
 	}
+	return nil
 }
 
-func (service *customerService) FindAll() []entity.Customer {
-	var result = []entity.Customer{
-		{
-			Name: "Alice",
-			Age:  12,
-		},
-		{
-			Name: "Bob",
-			Age:  15,
-		},
+func FindALL() (err error) {
+	if err = config.DB.Find(b).Error; err != nil {
+		return err
 	}
-	return result
+	return nil
 }
