@@ -4,16 +4,13 @@ import (
 	"init/entity"
 )
 
-func FindALL() []entity.Customer {
-	if err := Config.DB.Where("id = ?", id).First(b).Error; err != nil {
-		return err
-	}
-	return nil
-}
+func Find(c *entity.Customer) (err error) {
 
-func FindALL() (err error) {
-	if err = config.DB.Find(b).Error; err != nil {
-		return err
-	}
+	c.ID = "dslfjslkfjldjs234l3j4l2j4"
+	c.Age = 20
+	c.Code = "C0001"
+	c.Name = "ABC"
+	c.Email = "abc@gmail.com"
+
 	return nil
 }

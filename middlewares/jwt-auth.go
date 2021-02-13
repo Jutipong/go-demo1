@@ -16,7 +16,8 @@ func AuthorizeJWT() gin.HandlerFunc {
 		authHeader := c.GetHeader("Authorization")
 		tokenString := authHeader[len(BEARER_SCHEMA):]
 
-		token, err := service.NewJWTService().ValidateToken(tokenString)
+		// token, err := service.NewJWTService().ValidateToken(tokenString)
+		token, err := service.ValidateToken(tokenString)
 
 		if token.Valid {
 			claims := token.Claims.(jwt.MapClaims)
