@@ -15,3 +15,10 @@ go test
 ```bash
 gomon .
 ```
+
+## Postman collection
+
+```bash
+Go API Demo01.postman_collection.json
+```
+
