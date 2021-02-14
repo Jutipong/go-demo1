@@ -8,4 +8,6 @@ require (
 	github.com/go-playground/validator/v10 v10.2.0
 	github.com/jinzhu/gorm v1.9.16
 	gitlab.com/pragmaticreviews/golang-gin-poc v0.0.0-20200217232121-d0a67e33c0bd
+	gorm.io/driver/sqlserver v1.0.6
+	gorm.io/gorm v1.20.12
 )
