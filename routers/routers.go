@@ -36,16 +36,16 @@ func SetupRouter() *gin.Engine {
 	apiRoutes := r.Group("/api", middlewares.AuthorizeJWT())
 	// apiRoutes := r.Group("/api")
 	{
-		apiRoutes.GET("/customer", controller.FindAll)
+		// apiRoutes.GET("/customer", controller.FindAll)
 		// {
 		// 	// result := _customerController.FindAll()
 		// 	result :=
 		// 	c.JSON(200, result)
 		// })
-		apiRoutes.GET("/customer/:id", controller.FindID)
+		// apiRoutes.GET("/customer/:id", controller.FindID)
 		apiRoutes.POST("customer", controller.AddNewCustomer)
-		apiRoutes.PUT("customer/:id", controller.PutOneCustomer)
-		apiRoutes.DELETE("customer/:id", controller.DeleteCustomer)
+		// apiRoutes.PUT("customer/:id", controller.PutOneCustomer)
+		// apiRoutes.DELETE("customer/:id", controller.DeleteCustomer)
 	}
 	return r
 }

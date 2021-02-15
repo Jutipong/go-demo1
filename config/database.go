@@ -19,6 +19,7 @@ func ConnectDB(){
 	   fmt.Println("statuse: ", err)
    }
    //defer DB.Close()
+   
    DB=db
 
    

@@ -17,9 +17,9 @@ func FindID(c *gin.Context) {
 	custom := entity.Customer{}
 	err := service.FindID(&custom, id)
 	if err != nil {
-		helpers.RespondJSON(c, 404, custom)
+		helpers.RespondJSON(c, 404, err.Error(), custom)
 	} else {
-		helpers.RespondJSON(c, 200, custom)
+		helpers.RespondJSON(c, 200, "success", custom)
 	}
 
 }
@@ -30,22 +30,28 @@ func FindAll(c *gin.Context) {
 	custom := []entity.Customer{}
 	err := service.FindAll(&custom)
 	if err != nil {
-		helpers.RespondJSON(c, 404, custom)
+		helpers.RespondJSON(c, 404, err.Error(), custom)
 	} else {
-		helpers.RespondJSON(c, 200, custom)
+		helpers.RespondJSON(c, 200, "success", custom)
 	}
 }
 
 
 func AddNewCustomer(c *gin.Context) {
 	var custom entity.Customer
+	err := c.ShouldBindJSON(&custom)
 	c.BindJSON(&custom)
-	err := service.AddNewCustomer(&custom)
+
 	if err != nil {
-		helpers.RespondJSON(c, 404, custom)
-	} else {
-		helpers.RespondJSON(c, 200, custom)
-	}
+		helpers.RespondJSON(c, 404, err.Error(), custom)
+	} else{
+		err = service.AddNewCustomer(&custom)
+		if err != nil {
+			helpers.RespondJSON(c, 404, err.Error() ,custom)
+		} else {
+			helpers.RespondJSON(c, 200, "success" ,custom)
+		}
+	}	
 }
 
 func PutOneCustomer(c *gin.Context) {
@@ -53,14 +59,14 @@ func PutOneCustomer(c *gin.Context) {
 	id := c.Params.ByName("id")
 	err := service.FindID(&custom, id)
 	if err != nil {
-		helpers.RespondJSON(c, 404, custom)
+		helpers.RespondJSON(c, 404,err.Error(), custom)
 	}
 	c.BindJSON(&custom)
 	err = service.PutOneCustomer(&custom, id)
 	if err != nil {
-		helpers.RespondJSON(c, 404, custom)
+		helpers.RespondJSON(c, 404,err.Error(), custom)
 	} else {
-		helpers.RespondJSON(c, 200, custom)
+		helpers.RespondJSON(c, 200, "success", custom)
 	}
 }
 
@@ -69,8 +75,8 @@ func DeleteCustomer(c *gin.Context) {
 	id := c.Params.ByName("id")
 	err := service.DeleteCustomer(&custom, id)
 	if err != nil {
-		helpers.RespondJSON(c, 404, custom)
+		helpers.RespondJSON(c, 404,err.Error(), custom)
 	} else {
-		helpers.RespondJSON(c, 200, custom)
+		helpers.RespondJSON(c, 200, "success", custom)
 	}
 }
