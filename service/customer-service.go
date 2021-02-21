@@ -9,13 +9,6 @@ func FindAll(c *[]entity.Customer) (err error) {
 	if err = config.DB.Table("Customer").Find(&c).Error; err != nil {
 		return err
 	}
-
-	// c.ID = "dslfjslkfjldjs234l3j4l2j4"
-	// c.Age = 20
-	// c.Code = "C0001"
-	// c.Name = "ABC"
-	// c.Email = "abc@gmail.com"
-
 	return nil
 }
 

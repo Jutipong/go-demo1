@@ -3,7 +3,6 @@ package config
 import (
 	"gorm.io/driver/sqlserver"
 	"gorm.io/gorm"
-	"fmt"
 )
 
 var DB *gorm.DB
@@ -16,10 +15,11 @@ func ConnectDB(){
 
 
    if err != nil {
-	   fmt.Println("statuse: ", err)
+	   //fmt.Println("statuse: ", err)
+      panic("failed to connect database")
    }
    //defer DB.Close()
-   
+
    DB=db
 
    
