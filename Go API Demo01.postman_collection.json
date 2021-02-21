@@ -20,12 +20,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/login",
+					"raw": "http://localhost:8088/login",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8088",
 					"path": [
 						"login"
 					]
@@ -41,7 +41,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4iLCJhZG1pbiI6dHJ1ZSwiZXhwIjoxNjEzMTE4NDA3LCJpYXQiOjE2MTMxMTgyODcsImlzcyI6InByYWdtYXRpY3Jldmlld3MuY29tIn0.NRqoyaxFbpY22utbwIsrwhb7PwwPgDbD6e2RKgZQGiQ",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4iLCJhZG1pbiI6dHJ1ZSwiZXhwIjoxNjE0MTY5Mzk3LCJpYXQiOjE2MTM5MTAxOTcsImlzcyI6ImFiY2QyNDIzIn0.111GCTNih6cvFToDGDDNsuIObzg65XZH-isR2fdTG0s",
 							"type": "string"
 						}
 					]
@@ -55,12 +55,12 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8080/api/customer",
+					"raw": "http://localhost:8088/api/customer",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8088",
 					"path": [
 						"api",
 						"customer"
@@ -114,7 +114,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4iLCJhZG1pbiI6dHJ1ZSwiZXhwIjoxNjEzNjY4MzMyLCJpYXQiOjE2MTM0MDkxMzIsImlzcyI6ImFiY2QyNDIzIn0.i2sQ5ydakPDrYnXUd7NzSLIE-2v3v8m1uuiGL5bX4AE",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4iLCJhZG1pbiI6dHJ1ZSwiZXhwIjoxNjE0MTUzMjM4LCJpYXQiOjE2MTM4OTQwMzgsImlzcyI6ImFiY2QyNDIzIn0.by12Y_KG1vXLmcwGaSqY4Qdh8CLnzB9vVmOg1eK7EeY",
 							"type": "string"
 						}
 					]
@@ -129,7 +129,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n        \"id\": \"\",\r\n        \"code\": \"C0004\",\r\n        \"name\": \"mr.y gay\",\r\n        \"age\": 35,\r\n        \"email\": \"Yyyyy@gmail.com\"\r\n    }"
+					"raw": "{\r\n        \"id\": \"c001\",\r\n        \"code\": \"c001\",\r\n        \"name\": \"mr.y gay\",\r\n        \"age\": 35,\r\n        \"email\": \"Yyyyy@gmail.com\"\r\n    }"
 				},
 				"url": {
 					"raw": "http://localhost:8080/api/customer/",
@@ -173,7 +173,7 @@
 					"raw": "{\r\n        \"id\": \"yyyy0001\",\r\n        \"code\": \"C0004\",\r\n        \"name\": \"mr.y gay\",\r\n        \"age\": 25,\r\n        \"email\": \"y-g@gmail.com\"\r\n    }"
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/customer/yyyy0001",
+					"raw": "http://localhost:8080/api/customer/yyyy0002",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -182,7 +182,7 @@
 					"path": [
 						"api",
 						"customer",
-						"yyyy0001"
+						"yyyy0002"
 					]
 				}
 			},
