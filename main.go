@@ -1,44 +1,30 @@
 package main
 
 import (
-	"init/controller"
-	"init/middlewares"
-	"init/service"
-	"net/http"
-
-	"github.com/gin-gonic/gin"
+	 "init/config"
+	"init/routers"
+	"init/entity"
+	"os"
+	
 )
 
-var (
-	_customerService    service.CustomerService       = service.New()
-	_customerController controller.CustomerController = controller.New(_customerService)
-
-	loginService    service.LoginService       = service.NewLoginService()
-	jwtService      service.JWTService         = service.NewJWTService()
-	loginController controller.LoginController = controller.NewLoginController(loginService, jwtService)
-)
+var err error
 
 func main() {
-	r := gin.Default()
 
-	r.POST("/login", func(ctx *gin.Context) {
-		token := loginController.Login(ctx)
-		if token != "" {
-			ctx.JSON(http.StatusOK, gin.H{
-				"token": token,
-			})
-		} else {
-			ctx.JSON(http.StatusUnauthorized, nil)
-		}
-	})
+	config.ConnectDB()
+	config.DB.Table("Customer").AutoMigrate(&entity.Customer{})
 
-	apiRoutes := r.Group("/api", middlewares.AuthorizeJWT())
-	{
-		apiRoutes.GET("/customer", func(c *gin.Context) {
-			result := _customerController.FindAll()
-			c.JSON(200, result)
-		})
+	r := routers.SetupRouter()
+	//r.Run()
+
+	port := "8080"
+	if os.Getenv("ASPNETCORE_PORT") != "" { // get enviroment variable that set by ACNM 
+		port = os.Getenv("ASPNETCORE_PORT")
 	}
+	r.Run(":" + port) 
 
-	r.Run()
+
+
+
 }

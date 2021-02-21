@@ -2,85 +2,92 @@ package controller
 
 import (
 	"init/entity"
+	"init/helpers"
 	"init/service"
-
+	"errors"
+	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 )
 
-type CustomerController interface {
-	FindAll() []entity.Customer
+ //var validate *validator.Validate
+
+func FindID(c *gin.Context) {
+	// custom := new(entity.Customer)
+	id :=c.Params.ByName("id")
+	custom := entity.Customer{}
+	err := service.FindID(&custom, id)
+	if err != nil {
+		helpers.RespondJSON(c, 404, err.Error(), custom)
+	} else {
+		helpers.RespondJSON(c, 200, "success", custom)
+	}
+
 }
 
-type controller struct {
-	service service.CustomerService
-}
 
-var validate *validator.Validate
-
-func New(service service.CustomerService) CustomerController {
-	validate = validator.New()
-	return &controller{
-		service: service,
+func FindAll(c *gin.Context) {
+	// custom := new(entity.Customer)
+	custom := []entity.Customer{}
+	err := service.FindAll(&custom)
+	if err != nil {
+		helpers.RespondJSON(c, 404, err.Error(), custom)
+	} else {
+		helpers.RespondJSON(c, 200, "success", custom)
 	}
 }
 
-func (c *controller) FindAll() []entity.Customer {
-	return c.service.FindAll()
+// type error interface {
+//     Error() string
+// }
+
+func AddNewCustomer(c *gin.Context) {	
+
+	var custom entity.Customer
+	
+	err := c.ShouldBind(&custom)
+	c.BindJSON(&custom)
+	if  err != nil {
+		var verr validator.ValidationErrors
+		if errors.As(err, &verr) {
+			helpers.RespondJSON(c, 404,"errors", helpers.Descriptive(verr)) 
+			return
+		}
+		
+	}
+	// data is ok
+	err = service.AddNewCustomer(&custom)
+	if err != nil {
+		helpers.RespondJSON(c, 404, err.Error() ,custom)
+	} else {
+		helpers.RespondJSON(c, 200, "success" ,custom)
+	}
+	
+	
 }
 
-// type CustomerController interface {
-// 	Find(ctx *gin.Context) []entity.Customer
-// 	// Insert(ctx *gin.Context) bool
-// 	// Update(ctx *gin.Context) bool
-// 	// Delete(ctx *gin.Context) bool
-// }
+func PutOneCustomer(c *gin.Context) {
+	var custom entity.Customer
+	id := c.Params.ByName("id")
+	err := service.FindID(&custom, id)
+	if err != nil || custom.ID != id {
+		helpers.RespondJSON(c, 404,err.Error(), custom)
+	}
+	 c.BindJSON(&custom)
+	err = service.PutOneCustomer(&custom, id)
+	if err != nil {
+		helpers.RespondJSON(c, 404,err.Error(), custom)
+	} else {
+		helpers.RespondJSON(c, 200, "success", custom)
+	}
+}
 
-// type controller struct {
-// 	service service.CustomerService
-// }
-
-// //##register validate
-// var validate *validator.Validate
-// func New(service service.CustomerService) CustomerController {
-// 	validate = validator.New()
-// 	return &controller{
-// 		service: service,
-// 	}
-// }
-
-// func (c *controller) Find(ctx *gin.Context) model.Reponse {
-// 	cust := new(entity.Customer) //entity.Customer
-
-// 	fmt.Println("cust1 : ", cust)
-
-// 	fmt.Println("cust1 : ", cust)
-// 	// var result = new(model.Reponse)
-
-// 	//##check  map data json
-// 	err := ctx.ShouldBindJSON(&cust)
-
-// 	fmt.Println("err : ", err)
-// 	fmt.Println("cust1 : ", cust)
-
-// 	fmt.Println("cust2 : ", cust)
-
-// 	if err != nil {
-// 		return model.Reponse{
-// 			Message: "Error",
-// 		}
-// 	}
-
-// 	return model.Reponse{
-// 		Status: true ,
-// 		Code: 200 ,
-// 		Datas: cust,
-// 	}
-
-// 	//##validate model
-// 	// err = validate.Struct(cust)
-// 	// if err != nil {
-// 	// 	return result
-// 	// }
-// 	// res := c.service.Find(cust);
-
-// }
+func DeleteCustomer(c *gin.Context) {
+	var custom entity.Customer
+	id := c.Params.ByName("id")
+	err := service.DeleteCustomer(&custom, id)
+	if err != nil {
+		helpers.RespondJSON(c, 404,err.Error(), custom)
+	} else {
+		helpers.RespondJSON(c, 200, "success", custom)
+	}
+}
