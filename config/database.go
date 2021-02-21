@@ -7,20 +7,15 @@ import (
 
 var DB *gorm.DB
 
+func ConnectDB() {
 
-func ConnectDB(){
+	dsn := "sqlserver://sa:p@ssw0rd@172.17.9.83:1433?database=CallVerification_Test"
+	db, err := gorm.Open(sqlserver.Open(dsn), &gorm.Config{})
 
-   dsn := "sqlserver://sa:p@ssw0rd@localhost:1433?database=KTBCONRMS_DEV_P"
-   db, err :=  gorm.Open(sqlserver.Open(dsn), &gorm.Config{})
-
-
-   if err != nil {
-	   //fmt.Println("statuse: ", err)
-      panic("failed to connect database")
-   }
-   //defer DB.Close()
-
-   DB=db
-
-   
+	if err != nil {
+		//fmt.Println("statuse: ", err)
+		panic("failed to connect database")
+	}
+	//defer DB.Close()
+	DB = db
 }
